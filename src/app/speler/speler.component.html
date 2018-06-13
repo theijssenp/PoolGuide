@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-sm-5" form-group>
+          <label for="name">Naam Speler</label>
+          <input type="text" id="name" ng-model="inputName" class="form-control" (input)="onUpdateSpeler($event)">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <hr>
+          <button class="btn btn-success" [disabled]="name === ''" (click)="onCreateSpeler()">Toevoegen speler</button>
+          <button class="btn btn-danger" type="button" (click)="onDeleteSpelers()">Schoon lijst</button>
+          <button class="btn btn-primary" type="button" (click)="onCreateList()">Creeër basis spelers</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-10">
+    <h4>Lijst met poolgasten</h4>
+    <ul class="list-group">
+      <a class="list-group-item" style="cursor: pointer;" *ngFor="let pool of poolgast">
+        {{pool.name}}
+        <a class="glyphicon glyphicon-trash" (click)="remove(pool.name)"></a>
+      </a>
+    </ul>
+  </div>
+</div>
+
+<!--div class="row">
+  <div class="col-md-5">
+    <h4>Lijst met poolgasten</h4>
+    <div class="row">
+      <div *ngFor="let pool of poolgast" class="col-md-5">
+        {{pool.name}}
+        <div class="row">
+          <div class="col-md-2">
+            <a class="glyphicon glyphicon-trash" (click)="remove(pool.name)"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div-->
+
+<button class="btn btn-primary" [disabled]="poolgast.length < 2" type="button" (click)="onCreateGame()">Genereer wedstrijd</button>
+<button class="btn btn-primary" [disabled]="poolgast.length < 2" type="button" (click)="onReShuffle()">Re shuffle wedstijd</button>
+<!--button class="btn btn-primary" [disabled]="poolgast.length < 1" type="button" (click)="onReShuffle()">Nieuw Spel</button-->
+<hr>
+<div class="row">
+  <div class="col-xs-10">
+    <h4>Spellen</h4>
+    <ul class="list-group">
+      <a class="list-group-item" style="cursor: pointer;" *ngFor="let spel of spellen">
+        Break voor {{spel.nameBreak}} tegen {{spel.tegen}} <input type="checkbox" ng-model="selected">
+      </a>
+    </ul>
+  </div>
+</div>
+
+<!--app-spellen></app-spellen-->
