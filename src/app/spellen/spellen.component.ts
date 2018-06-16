@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./spellen.component.css']
 })
 export class SpellenComponent implements OnInit {
- @Input() spel: ( beurtnummer: number,  nameBreak: string,  tegen: string);
+ @Input() spel: {beurtnummer: number,  nameBreak: string,  tegen: string};
   constructor() { }
 
   ngOnInit() {
