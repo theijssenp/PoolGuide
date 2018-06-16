@@ -47,20 +47,9 @@
     </div>
   </div>
 </div-->
-
 <button class="btn btn-primary" [disabled]="poolgast.length < 2" type="button" (click)="onCreateGame()">Genereer wedstrijd</button>
 <button class="btn btn-primary" [disabled]="poolgast.length < 2" type="button" (click)="onReShuffle()">Re shuffle wedstijd</button>
 <!--button class="btn btn-primary" [disabled]="poolgast.length < 1" type="button" (click)="onReShuffle()">Nieuw Spel</button-->
 <hr>
-<div class="row">
-  <div class="col-xs-10">
-    <h4>Spellen</h4>
-    <ul class="list-group">
-      <a class="list-group-item" style="cursor: pointer;" *ngFor="let spel of spellen">
-        Break voor {{spel.nameBreak}} tegen {{spel.tegen}} <input type="checkbox" ng-model="selected">
-      </a>
-    </ul>
-  </div>
-</div>
-
-<!--app-spellen></app-spellen-->
+<h4>Spellen</h4>
+<app-spellen *ngFor="let spel of spellen" [spel]="spel"></app-spellen>

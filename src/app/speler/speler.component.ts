@@ -25,7 +25,7 @@ export class SpelerComponent implements OnInit {
     //console.log('naam is: ' + this.name);
     // new Poolgast(this.name);
     this.poolgast.push(new Poolgast(this.name));
-    this.name = '';
+    this.name = null;
   };
 
   onDeleteSpelers() {
