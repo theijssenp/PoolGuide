@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Poolgast } from '../shared/poolgast.model'
 import { Spellen } from '../shared/spellen.model'
+import { SpelerService } from './speler.service';
+import { SpellenService } from './spellen.service';
 
 @Component({
   selector: 'app-speler',
@@ -9,9 +11,17 @@ import { Spellen } from '../shared/spellen.model'
 })
 export class SpelerComponent implements OnInit {
   name: string = '';
-  poolgast: Poolgast[] = [];
-  spellen: Spellen[] = [];
+  spelerservice = new SpelerService();
+  spellenservice = new SpellenService();
+  poolgast: Poolgast[] = this.spelerservice.getPoolgasten();
+  spellen: Spellen[] = this.spellenservice.getSpelen();
+  spelleeg: boolean = true;
+  toggleheader: boolean = true;
   constructor() {
+  }
+
+  toggleHeader(){
+    this.toggleheader = !this.toggleheader;
   }
 
   onUpdateSpeler(event: any) {
@@ -24,8 +34,10 @@ export class SpelerComponent implements OnInit {
 
     //console.log('naam is: ' + this.name);
     // new Poolgast(this.name);
-    this.poolgast.push(new Poolgast(this.name));
+    //this.poolgast.push(new Poolgast(this.name));
+    this.spelerservice.addPoolgast(this.name);
     this.name = null;
+    this.poolgast = this.spelerservice.getPoolgasten();
   };
 
   onDeleteSpelers() {
@@ -35,8 +47,8 @@ export class SpelerComponent implements OnInit {
       //console.log('weggooien ' + i);
       this.poolgast.splice(i - 1, 1);
       i = this.poolgast.length;
-
     }
+    this.spelerservice.setPoolgasten(this.poolgast);
   }
 
   onDeleteSpel() {
@@ -45,19 +57,20 @@ export class SpelerComponent implements OnInit {
     while (i > 0) {
       this.spellen.splice(i - 1, 1);
       i = this.spellen.length;
-
     }
+    this.spelleeg = true;
+    this.spellenservice.setSpelen(this.spellen);
   }
 
   onCreateList() {
     // Eerst schonen
     this.onDeleteSpelers();
     // Nu opnieuw aanmaken met basis spelers
-
-    this.poolgast.push(new Poolgast('Udo'));
-    this.poolgast.push(new Poolgast('Chris'));
-    this.poolgast.push(new Poolgast('Hendrik-Jan'));
-    this.poolgast.push(new Poolgast('Pieter'));
+    this.spelerservice.addPoolgast('Udo');
+    this.spelerservice.addPoolgast('Chris');
+    this.spelerservice.addPoolgast('Hendrik-Jan');
+    this.spelerservice.addPoolgast('Pieter');
+    this.poolgast = this.spelerservice.getPoolgasten();
   }
 
   remove(name: string) {
@@ -69,6 +82,7 @@ export class SpelerComponent implements OnInit {
       i++;
     }
     );
+    this.spelerservice.setPoolgasten(this.poolgast);
   }
 
   getPermutations(array, size) {
@@ -111,16 +125,16 @@ export class SpelerComponent implements OnInit {
 
   onReShuffle() {
     this.spellen = this.shuffle(this.spellen);
+    this.spellenservice.setSpelen(this.spellen);
   }
 
-  onCreateGame() {
-    // we beginnen met een schoon spel
+  newSpel() { // we beginnen met een schoon spel
     this.onDeleteSpel();
 
     var combinaties = this.getPermutations(this.poolgast, 2);
     var beurtteller: number = 1;
     combinaties.forEach(element => {
-     // console.log(element[0].name + ' break tegen ' + element[1].name);
+      // console.log(element[0].name + ' break tegen ' + element[1].name);
 
       this.spellen.push(new Spellen(beurtteller, element[0].name, element[1].name));
 
@@ -141,7 +155,8 @@ export class SpelerComponent implements OnInit {
     // );
 
     this.spellen = this.shuffle(this.spellen);
-
+    this.spellenservice.setSpelen(this.spellen);
+    this.spelleeg = false;
     // // debug om te kijken wat het is geworden
     // this.spellen.forEach(element => {
     //   console.log('beurtnummer: ' + element.beurtnummer +
@@ -150,10 +165,17 @@ export class SpelerComponent implements OnInit {
     //     ' tegen: ' + element.tegen);
     // }
     // );
-
   }
 
-
+  onCreateGame() {
+    if (this.spelleeg) {
+      this.newSpel();
+    } else {
+      if (confirm("Weet je zeker dat je een nieuwe game wil genereren?")) {
+        this.newSpel();
+      }
+    }
+  }
   ngOnInit() {
   }
 
