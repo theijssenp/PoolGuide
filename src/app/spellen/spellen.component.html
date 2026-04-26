@@ -1,0 +1,20 @@
+<div class="pg-match">
+  <div class="pg-match-player pg-match-break">
+    <span class="pg-match-avatar">{{ spel.nameBreak.charAt(0) }}</span>
+    <span class="pg-match-name">{{ spel.nameBreak }}</span>
+    <span class="pg-match-label">break</span>
+    <label class="toggle-switch">
+      <input type="checkbox" [(ngModel)]="selected">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+  <div class="pg-match-vs">vs</div>
+  <div class="pg-match-player">
+    <span class="pg-match-avatar pg-match-avatar--away">{{ spel.tegen.charAt(0) }}</span>
+    <span class="pg-match-name">{{ spel.tegen }}</span>
+    <label class="toggle-switch">
+      <input type="checkbox" [(ngModel)]="selected">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+</div>

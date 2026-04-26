@@ -1,0 +1,46 @@
+.pg-header {
+  background: var(--pg-surface);
+  border-bottom: 1px solid var(--pg-border);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.pg-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pg-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pg-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.pg-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--pg-green-light), var(--pg-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pg-subtitle {
+  font-size: 0.8rem;
+  color: var(--pg-text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
