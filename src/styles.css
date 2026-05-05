@@ -123,6 +123,7 @@ input:focus, button:focus-visible {
   display: inline-block;
   width: 36px;
   height: 20px;
+  flex-shrink: 0;
 }
 
 .toggle-switch input {
@@ -159,4 +160,14 @@ input:focus, button:focus-visible {
 .toggle-switch input:checked + .toggle-slider::before {
   transform: translateX(16px);
   background: #fff;
+}
+
+/* v2.1 — speler-naam bugfix: forceer zichtbaarheid break-speler naam */
+.pg-match-break {
+  flex: 3 1 0% !important;
+}
+
+.pg-match-name {
+  flex: 1 !important;
+  min-width: 0 !important;
 }

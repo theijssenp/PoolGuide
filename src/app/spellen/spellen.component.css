@@ -1,3 +1,4 @@
+/* v2 - speler 1 naam fix */
 .pg-match {
   background: var(--pg-card);
   border: 1px solid var(--pg-border);
@@ -23,6 +24,7 @@
 }
 
 .pg-match-break {
+  flex: 3 1 0% !important;
   text-align: right;
   justify-content: flex-end;
 }
@@ -53,6 +55,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1 !important;
+  min-width: 0 !important;
 }
 
 .pg-match-break .pg-match-name {
